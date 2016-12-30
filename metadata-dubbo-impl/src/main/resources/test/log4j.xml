@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+    <!-- access:接收请求日志 -->
+    <appender name="access" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="file" value="/var/log/metadata-dubbo-impl/access.log"/>
+        <param name="datePattern" value=".yyyyMMdd"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} [%p]-[%t]-[%l] %m%n"/>
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="levelMin" value="info"/>
+            <param name="levelMax" value="info"/>
+            <param name="AcceptOnMatch" value="true"/>
+        </filter>
+    </appender>
+    <!-- third:第三方请求日志 -->
+    <appender name="third" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="file" value="/var/log/metadata-dubbo-impl/third.log"/>
+        <param name="datePattern" value=".yyyyMMdd"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} [%p]-[%t]-[%l] %m%n"/>
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="levelMin" value="info"/>
+            <param name="levelMax" value="info"/>
+            <param name="AcceptOnMatch" value="true"/>
+        </filter>
+    </appender>
+    <!-- sql -->
+    <appender name="sql" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="file" value="/var/log/metadata-dubbo-impl/sql.log"/>
+        <param name="datePattern" value=".yyyyMMdd"/>
+        <param name="append" value="true" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} [%p]-[%t]-[%l] %m%n"/>
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="levelMin" value="info"/>
+            <param name="levelMax" value="info"/>
+            <param name="AcceptOnMatch" value="true"/>
+        </filter>
+    </appender>
+    <!-- info:业务信息日志 -->
+    <appender name="info" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="file" value="/var/log/metadata-dubbo-impl/info.log"/>
+        <param name="datePattern" value=".yyyyMMdd"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} [%p]-[%t]-[%l] %m%n"/>
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="levelMin" value="info"/>
+            <param name="levelMax" value="info"/>
+            <param name="AcceptOnMatch" value="true"/>
+        </filter>
+    </appender>
+    <!-- warn:RuntimeException不用处理的日志 -->
+    <appender name="warn" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="file" value="/var/log/metadata-dubbo-impl/warn.log"/>
+        <param name="datePattern" value=".yyyyMMdd"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} [%p]-[%t]-[%l] %m%n"/>
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="levelMin" value="warn"/>
+            <param name="levelMax" value="warn"/>
+            <param name="AcceptOnMatch" value="true"/>
+        </filter>
+    </appender>
+    <!-- error:Throwable需要处理日志 -->
+    <appender name="error" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="file" value="/var/log/metadata-dubbo-impl/error.log"/>
+        <param name="datePattern" value=".yyyyMMdd"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} [%p]-[%t]-[%l] %m%n"/>
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="levelMin" value="error"/>
+            <param name="levelMax" value="error"/>
+            <param name="AcceptOnMatch" value="true"/>
+        </filter>
+    </appender>
+    
+    <logger name="access" additivity="false">
+        <appender-ref ref="access"/>
+    </logger>
+    <logger name="third" additivity="false">
+        <appender-ref ref="third"/>
+    </logger>
+    <logger name="sql" additivity="false">
+        <appender-ref ref="sql"/>
+    </logger>
+    <root>
+        <appender-ref ref="info"/>
+        <appender-ref ref="warn"/>
+        <appender-ref ref="error"/>
+    </root>
+</log4j:configuration>
